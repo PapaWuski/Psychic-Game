@@ -3,7 +3,7 @@ var lose = 0;
 var tries = 10;
 
 var container = document.getElementById("tracker");
-var wrongGuess = [];
+var guess = [];
 var target = String.fromCharCode(97 + Math.floor(Math.random() * 26));
 console.log(target)
 
@@ -11,15 +11,20 @@ function resetGame() {
     target = String.fromCharCode(97 + Math.floor(Math.random() * 26));
     console.log(target)
     tries = 10;
-    wrongGuess = [];
+    guess = [];
     document.querySelector("#attempts").innerHTML = tries;
-    document.querySelector("#guess").innerHTML = wrongGuess;
+    document.querySelector("#guess").innerHTML = guess;
 }
 
-function logScore(){
+function logScore(endGame) {
     var paragraph = document.createElement("P");
-    paragraph.textContent = ui_in;
-    paragraph.setAttribute("class","redText");
+    paragraph.textContent = `${endGame}| Letter:${target} | Guesses ${guess}`;
+    if (endGame === "Win") {
+        paragraph.setAttribute("class", "redText");
+    } else {
+        paragraph.setAttribute("class", "redText");
+    }
+
     container.appendChild(paragraph);
 }
 document.onkeypress = function (event) {
@@ -29,23 +34,26 @@ document.onkeypress = function (event) {
         return;
     }
     if (event.key === target) {
+        guess.push(event.key);
         console.log("you win");
         win++;
         document.querySelector("#winScore").innerHTML = win;
+        logScore("Win");
         resetGame();
-    } else if (!wrongGuess.includes(event.key)) {
+    } else if (!guess.includes(event.key)) {
         tries--;
-        wrongGuess.push(event.key);
-        console.log("wrong", wrongGuess);
+        guess.push(event.key);
+        console.log("wrong", guess);
         document.querySelector("#attempts").innerHTML = tries;
-        document.querySelector("#guess").innerHTML = wrongGuess;
+        document.querySelector("#guess").innerHTML = guess;
         if (tries === 0) {
             lose++;
             document.querySelector("#loseScore").innerHTML = lose;
+            logScore("Lose");
             resetGame();
         }
     } else {
-        console.log("Already Guessed that letter");
+        alert("Already Guessed that letter");
     }
 
 }
