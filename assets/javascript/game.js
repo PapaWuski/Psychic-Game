@@ -18,7 +18,7 @@ function resetGame() {
 
 function logScore(endGame) {
     var paragraph = document.createElement("P");
-    paragraph.textContent = `${endGame} | Goal: ${target} | Guesses: ${guess}`;
+    paragraph.textContent = `Game#: ${win + lose} | ${endGame} | Goal: ${target} | Guesses(${guess.length}): ${guess.join(" ")}`;
     if (endGame === "Win") {
         paragraph.setAttribute("class", "bg-primary text-light p-1");
     } else {
@@ -35,7 +35,7 @@ document.onkeypress = function (event) {
     }
     if (event.key === target) {
         guess.push(event.key);
-        console.log("you win");
+        // console.log("you win");
         win++;
         document.querySelector("#winScore").innerHTML = win;
         logScore("Win");
@@ -43,9 +43,9 @@ document.onkeypress = function (event) {
     } else if (!guess.includes(event.key)) {
         tries--;
         guess.push(event.key);
-        console.log("wrong", guess);
+        // console.log("wrong", guess);
         document.querySelector("#attempts").innerHTML = tries;
-        document.querySelector("#guess").innerHTML = guess;
+        document.querySelector("#guess").innerHTML = guess.join(" ");
         if (tries === 0) {
             lose++;
             document.querySelector("#loseScore").innerHTML = lose;
