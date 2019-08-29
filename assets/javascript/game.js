@@ -18,11 +18,11 @@ function resetGame() {
 
 function logScore(endGame) {
     var paragraph = document.createElement("P");
-    paragraph.textContent = `${endGame}| Letter:${target} | Guesses ${guess}`;
+    paragraph.textContent = `${endGame} | Goal: ${target} | Guesses: ${guess}`;
     if (endGame === "Win") {
-        paragraph.setAttribute("class", "redText");
+        paragraph.setAttribute("class", "bg-primary text-light p-1");
     } else {
-        paragraph.setAttribute("class", "redText");
+        paragraph.setAttribute("class", "bg-danger text-light p-1");
     }
 
     container.appendChild(paragraph);
