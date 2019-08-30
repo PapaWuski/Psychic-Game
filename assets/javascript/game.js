@@ -13,7 +13,7 @@ function resetGame() {
   tries = 10;
   guess = [];
   document.querySelector("#attempts").innerHTML = tries;
-  document.querySelector("#guess").innerHTML = guess;
+  document.querySelector("#uiGuess").innerHTML = guess;
 }
 
 function logScore(endGame) {
