@@ -27,7 +27,7 @@ function logScore(endGame) {
     paragraph.setAttribute("class", "bg-danger text-light p-1");
   }
 
-  container.appendChild(paragraph);
+  container.insertBefore(paragraph,container.firstChild);
 }
 document.onkeypress = function(event) {
   // console.log(event.key);
